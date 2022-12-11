@@ -7,6 +7,7 @@ import { Modal } from "./Modal";
 export function Home() {
   const [posts, setPosts] = useState([]);
   const [isPostsShowVisible, setIsPostsShowVisible] = useState(false);
+  const [currentPost, setCurrentPost] = useState([]);
 
   const handleIndexPosts = () => {
     axios.get("http://localhost:3000/posts").then((response) => {
@@ -14,8 +15,9 @@ export function Home() {
     });
   };
 
-  const handleShowPost = () => {
+  const handleShowPost = (post) => {
     setIsPostsShowVisible(true);
+    setCurrentPost(post);
   };
 
   const handleHidePost = () => {
@@ -29,7 +31,8 @@ export function Home() {
       <PostsNew />
       <PostsIndex posts={posts} onSelectPost={handleShowPost} />
       <Modal show={isPostsShowVisible} onClose={handleHidePost}>
-        <p>Watch Out!</p>
+        <h1>{currentPost.title}</h1>
+        <p>{currentPost.body}</p>
       </Modal>
     </div>
   );
