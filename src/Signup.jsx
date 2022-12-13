@@ -1,23 +1,34 @@
 import axios from "axios";
+import { useState } from "react";
 
 export function Signup() {
+  const [errors, setErrors] = useState([]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrors([]);
     const params = new FormData(event.target);
     axios
       .post("http://localhost:3000/users", params)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         event.target.reset();
+        window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
       })
-      .catch((errors) => {
-        console.log(errors.response.data.errors);
+      .catch((error) => {
+        console.log(error.response.data.errors);
+        setErrors(error.response.data.errors);
       });
   };
 
   return (
     <div id="signup">
       <h1>Signup</h1>
+      <ul>
+        {errors.map((error) => (
+          <li key={error}>{error}</li>
+        ))}
+      </ul>
       <form onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" className="form-control" type="text" />
@@ -31,7 +42,7 @@ export function Signup() {
         <div>
           Password confirmation: <input name="password_confirmation" className="form-control" type="password" />
         </div>
-        <button className="mt-3 btn btn-secondary" type="submit">
+        <button type="submit" className="mt-3 btn btn-primary">
           Signup
         </button>
       </form>
