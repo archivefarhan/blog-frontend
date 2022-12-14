@@ -18,6 +18,28 @@ export function Home() {
     });
   };
 
+  const handleCreatePost = (params) => {
+    axios.post("http://localhost:3000/posts", params).then((response) => {
+      setPosts([...posts, response.data]);
+    });
+  };
+
+  const handleUpdatePost = (id, params) => {
+    axios.patch("http://localhost:3000/posts/" + id + ".json", params).then((response) => {
+      console.log(response.data);
+      setIsPostsShowVisible(false);
+      setPosts(
+        posts.map((post) => {
+          if (post.id === id) {
+            return response.data;
+          } else {
+            return post;
+          }
+        })
+      );
+    });
+  };
+
   const handleShowPost = (post) => {
     setIsPostsShowVisible(true);
     setCurrentPost(post);
@@ -33,10 +55,10 @@ export function Home() {
     <div>
       <Signup />
       <Login />
-      <PostsNew />
+      <PostsNew onCreatePost={handleCreatePost} />
       <PostsIndex posts={posts} onSelectPost={handleShowPost} />
       <Modal show={isPostsShowVisible} onClose={handleHidePost}>
-        <PostsShow post={currentPost} />
+        <PostsShow post={currentPost} onUpdatePost={handleUpdatePost} />
       </Modal>
     </div>
   );
