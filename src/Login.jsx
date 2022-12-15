@@ -29,7 +29,7 @@ export function Login() {
   };
 
   return (
-    <div id="login" class="ps-2">
+    <div id="login" class="ps-2 container mt-3 ">
       <h1>Login</h1>
       <ul>
         {errors.map((error) => (
@@ -40,6 +40,7 @@ export function Login() {
         <div>
           Email: <input name="email" className="form-control" type="email" />
         </div>
+        <br />
         <div>
           Password: <input name="password" className="form-control" type="password" />
         </div>

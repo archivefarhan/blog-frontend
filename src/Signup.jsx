@@ -22,8 +22,8 @@ export function Signup() {
   };
 
   return (
-    <div id="signup" class="ps-2">
-      <h1>Signup</h1>
+    <div id="signup" class="ps-2 container">
+      <h1 className="mt-3 ">Signup</h1>
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>

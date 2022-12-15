@@ -8,7 +8,7 @@ export function PostsShow(props) {
   return (
     <div>
       <h1>{props.post.title}</h1>
-      <img src={props.post.image} alt="" height="50%" />
+      <img src={props.post.image} alt="" height="50%" width="20%" />
       <p>{props.post.body}</p>
       <div>
         <h3> Edit Post</h3>

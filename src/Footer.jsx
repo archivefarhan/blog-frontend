@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer>
-      <p>Copyright 2022</p>
+      <p className="ps-3 mt-3 text-center text-primary">Bloggy Copyright 2022©</p>
     </footer>
   );
 }
